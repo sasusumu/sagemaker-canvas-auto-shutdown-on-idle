@@ -115,7 +115,7 @@ Resources:
   TimeSinceLastActiveAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: !Sub ${AWS::StackName}-TimeSinceLastActiveAlarm
+      AlarmName: TimeSinceLastActiveAlarm
       AlarmDescription: Alarm when TimeSinceLastActive exceeds 2 hours
       EvaluationPeriods: 1
       Threshold: !Ref IdleTimeout
@@ -129,9 +129,10 @@ Resources:
   EventBridgeToLambdaRule:
     Type: AWS::Events::Rule
     Properties: 
-      Name: !Sub ${AWS::StackName}-CanvasAutoShutdownRule
+      Name: CanvasAutoShutdownRule
       Description: Rule that executes a Lambda function whenever the Alarm is triggered
       EventBusName: default
+      
       EventPattern:
         source: 
           - aws.cloudwatch
